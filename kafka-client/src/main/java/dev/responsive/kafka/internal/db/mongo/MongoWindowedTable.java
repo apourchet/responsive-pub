@@ -236,7 +236,7 @@ public class MongoWindowedTable implements RemoteWindowedTable<WriteModel<Window
         new PartitionSegments(
             database,
             adminDatabase,
-            partitioner.segmenter,
+            partitioner.segmenter(),
             kafkaPartition,
             metaDoc.streamTime,
             metaDoc.epoch,
@@ -429,7 +429,7 @@ public class MongoWindowedTable implements RemoteWindowedTable<WriteModel<Window
     final List<KeyValueIterator<WindowedKey, byte[]>> segmentIterators = new LinkedList<>();
     final var partitionSegments = kafkaPartitionToSegments.get(kafkaPartition);
 
-    for (final var segment : partitioner.segmenter.range(kafkaPartition, timeFrom, timeTo)) {
+    for (final var segment : partitioner.segmenter().range(kafkaPartition, timeFrom, timeTo)) {
       final var segmentWindows = partitionSegments.segmentWindows.get(segment);
       final FindIterable<WindowDoc> fetchResults = segmentWindows.find(
           Filters.and(

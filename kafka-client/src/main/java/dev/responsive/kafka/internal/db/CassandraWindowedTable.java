@@ -487,7 +487,7 @@ public class CassandraWindowedTable implements RemoteWindowedTable<BoundStatemen
     // therefore we initialize from the metadata partition and then broadcast the epoch to
     // all the other partitions containing data for active segments
     final List<SegmentPartition> activeSegments =
-        partitioner.segmenter.activeSegments(kafkaPartition, streamTime);
+        partitioner.segmenter().activeSegments(kafkaPartition, streamTime);
     if (activeSegments.isEmpty()) {
       LOG.info("Skipping reservation of epoch {} for kafka partition {} due to no active segments",
                epoch, kafkaPartition);
@@ -790,7 +790,7 @@ public class CassandraWindowedTable implements RemoteWindowedTable<BoundStatemen
       final long timeTo
   ) {
     final List<KeyValueIterator<WindowedKey, byte[]>> segmentIterators = new LinkedList<>();
-    for (final SegmentPartition partition : partitioner.segmenter.range(
+    for (final SegmentPartition partition : partitioner.segmenter().range(
         kafkaPartition,
         timeFrom,
         timeTo
@@ -818,7 +818,7 @@ public class CassandraWindowedTable implements RemoteWindowedTable<BoundStatemen
       final long timeTo
   ) {
     final List<KeyValueIterator<WindowedKey, byte[]>> segmentIterators = new LinkedList<>();
-    for (final var partition : partitioner.segmenter.reverseRange(
+    for (final var partition : partitioner.segmenter().reverseRange(
         kafkaPartition,
         timeFrom,
         timeTo
@@ -847,7 +847,7 @@ public class CassandraWindowedTable implements RemoteWindowedTable<BoundStatemen
       final long timeTo
   ) {
     final List<KeyValueIterator<WindowedKey, byte[]>> segmentIterators = new LinkedList<>();
-    for (final SegmentPartition partition : partitioner.segmenter.range(
+    for (final SegmentPartition partition : partitioner.segmenter().range(
         kafkaPartition,
         timeFrom,
         timeTo
@@ -878,7 +878,7 @@ public class CassandraWindowedTable implements RemoteWindowedTable<BoundStatemen
       final long timeTo
   ) {
     final List<KeyValueIterator<WindowedKey, byte[]>> segmentIterators = new LinkedList<>();
-    for (final var partition : partitioner.segmenter.reverseRange(
+    for (final var partition : partitioner.segmenter().reverseRange(
         kafkaPartition,
         timeFrom,
         timeTo
@@ -907,7 +907,7 @@ public class CassandraWindowedTable implements RemoteWindowedTable<BoundStatemen
       final long timeTo
   ) {
     final List<KeyValueIterator<WindowedKey, byte[]>> segmentIterators = new LinkedList<>();
-    for (final SegmentPartition partition : partitioner.segmenter.range(
+    for (final SegmentPartition partition : partitioner.segmenter().range(
         kafkaPartition,
         timeFrom,
         timeTo
@@ -936,7 +936,7 @@ public class CassandraWindowedTable implements RemoteWindowedTable<BoundStatemen
       final long timeTo
   ) {
     final List<KeyValueIterator<WindowedKey, byte[]>> segmentIterators = new LinkedList<>();
-    for (final var partition : partitioner.segmenter.reverseRange(
+    for (final var partition : partitioner.segmenter().reverseRange(
         kafkaPartition,
         timeFrom,
         timeTo

@@ -52,7 +52,7 @@ public class MongoWindowFlushManager extends WindowFlushManager {
       final int kafkaPartition,
       final long streamTime
   ) {
-    super(table.name(), kafkaPartition, partitioner.segmenter, streamTime);
+    super(table.name(), kafkaPartition, partitioner.segmenter(), streamTime);
 
     this.table = table;
     this.windowsForSegment = windowsForSegment;

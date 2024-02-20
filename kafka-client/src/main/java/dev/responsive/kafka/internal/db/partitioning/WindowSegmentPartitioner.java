@@ -26,7 +26,7 @@ public class WindowSegmentPartitioner implements
   private static final Logger LOG = LoggerFactory.getLogger(WindowSegmentPartitioner.class);
   private static final long METADATA_SEGMENT_ID = -1L;
 
-  public final Segmenter segmenter;
+  private final Segmenter segmenter;
 
   public WindowSegmentPartitioner(final long retentionPeriodMs, final long segmentIntervalMs) {
     this.segmenter = new Segmenter(retentionPeriodMs, segmentIntervalMs);
@@ -48,4 +48,7 @@ public class WindowSegmentPartitioner implements
     return new Segmenter.SegmentPartition(kafkaPartition, METADATA_SEGMENT_ID);
   }
 
+  public Segmenter segmenter() {
+    return this.segmenter;
+  }
 }
